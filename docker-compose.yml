@@ -1,0 +1,37 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: curdos-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: curdos_lancha
+      POSTGRES_USER: curdo
+      POSTGRES_PASSWORD: curdo_secure_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U curdo -d curdos_lancha" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: curdos-app
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: "postgresql://curdo:curdo_secure_password@postgres:5432/curdos_lancha?schema=public"
+      NEXT_PUBLIC_WHATSAPP_PHONE: "5548999999999"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+
