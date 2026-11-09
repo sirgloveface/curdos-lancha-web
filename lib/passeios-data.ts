@@ -11,6 +11,7 @@ export interface PasseioItem {
   incluso: string[];
   destaque: boolean;
   imagemUrl: string;
+  imagens?: string[];
 }
 
 export const PASSEIOS_DATA: PasseioItem[] = [
@@ -41,6 +42,11 @@ export const PASSEIOS_DATA: PasseioItem[] = [
     ],
     destaque: true,
     imagemUrl: "/img/Drone/Drone%20-%20Curdos%20Lancha%20(2).JPG",
+    imagens: [
+      "/img/Drone/Drone%20-%20Curdos%20Lancha%20(2).JPG",
+      "/img/Camera/Camera%20-%20Curdos%20Lancha%20(3).jpg",
+      "/img/Drone/Drone%20-%20Curdos%20Lancha%20(6).JPG",
+    ],
   },
   {
     id: "campeche-vip",
@@ -50,25 +56,55 @@ export const PASSEIOS_DATA: PasseioItem[] = [
     duracaoHoras: 6,
     capacidadeMax: 9,
     valorBase: 2800,
-    localEmbarque: "Marina da Barra da Lagoa",
+    localEmbarque: "Marina Verde Mar / Barra da Lagoa",
     roteiro: ["Barra da Lagoa", "Praia da Galheta", "Praia Mole", "Ilha do Campeche"],
-    incluso: ["Combustível", "Marinheiro Habilitado", "Cooler com Gelo", "Máscaras de Snorkel", "Stand-Up Paddle"],
+    incluso: [
+      "1 Vaga de Estacionamento na Marina",
+      "Combustível de Todo o Percurso",
+      "Marinheiro Habilitado",
+      "Cooler com Gelo Disponível",
+      "Máscaras & Boias de Flutuação",
+      "Serviço de Churrasco a Bordo",
+    ],
     destaque: true,
     imagemUrl: "/img/Drone/Drone%20-%20Curdos%20Lancha%20(10).JPG",
+    imagens: [
+      "/img/Drone/Drone%20-%20Curdos%20Lancha%20(10).JPG",
+      "/img/Camera/Camera%20-%20Curdos%20Lancha%20(15).jpg",
+      "/img/Drone/Drone%20-%20Curdos%20Lancha%20(20).JPG",
+    ],
   },
   {
-    id: "baia-norte-golfinhos",
-    slug: "baia-norte-anhatomirim",
-    titulo: "Baía Norte & Anhatomirim",
-    descricao: "Roteiro histórico passando pela Fortaleza de Santa Cruz, Baía dos Golfinhos e almoço na Baía de Santo Antônio.",
-    duracaoHoras: 5,
+    id: "baia-funda-castelinho",
+    slug: "baia-funda-ou-castelinho",
+    titulo: "Baía Funda ou Castelinho",
+    descricao: "Passeio curto e relaxante pelas águas abrigadas da Lagoa da Conceição, com parada paradisíaca na Baía Funda ou Castelinho para banho e fotos.",
+    duracaoHoras: 3,
     capacidadeMax: 9,
-    valorBase: 2400,
-    localEmbarque: "Trapiche de Jurerê Tradicional",
-    roteiro: ["Praia do Forte", "Baía dos Golfinhos", "Ilha de Anhatomirim", "Magalhães"],
-    incluso: ["Combustível", "Marinheiro Habilitado", "Som Bluetooth Náutico", "Água Mineral", "Boias Espaguete"],
+    valorBase: 1600,
+    localEmbarque: "Marina Verde Mar (Lagoa da Conceição)",
+    roteiro: [
+      "Marina Verde Mar",
+      "Canal da Barra",
+      "Lagoa da Conceição",
+      "Baía Funda ou Castelinho",
+      "Parada para Banho & Flutuação",
+    ],
+    incluso: [
+      "1 Vaga de Estacionamento na Marina",
+      "Combustível de Todo o Percurso",
+      "Marinheiro Habilitado",
+      "Cooler com Gelo Disponível",
+      "Máscaras & Boias de Flutuação",
+      "Sem Serviço de Churrasco",
+    ],
     destaque: false,
-    imagemUrl: "/img/Camera/Camera%20-%20Curdos%20Lancha%20(1).jpg",
+    imagemUrl: "/img/Drone/Drone%20-%20Curdos%20Lancha%20(25).JPG",
+    imagens: [
+      "/img/Drone/Drone%20-%20Curdos%20Lancha%20(25).JPG",
+      "/img/Camera/Camera%20-%20Curdos%20Lancha%20(22).JPG",
+      "/img/Drone/Drone%20-%20Curdos%20Lancha%20(28).JPG",
+    ],
   },
   {
     id: "costa-da-lagoa",
@@ -78,11 +114,23 @@ export const PASSEIOS_DATA: PasseioItem[] = [
     duracaoHoras: 4,
     capacidadeMax: 9,
     valorBase: 1900,
-    localEmbarque: "Centrinho da Lagoa da Conceição",
+    localEmbarque: "Marina Verde Mar (Lagoa da Conceição)",
     roteiro: ["Lagoa da Conceição", "Cachoeira da Costa", "Restaurantes Nativos", "Paradas para Banho"],
-    incluso: ["Combustível", "Marinheiro Habilitado", "Cooler Náutico", "Churrasqueira a Bordo (Opcional)"],
+    incluso: [
+      "1 Vaga de Estacionamento na Marina",
+      "Combustível de Todo o Percurso",
+      "Marinheiro Habilitado",
+      "Cooler com Gelo Disponível",
+      "Máscaras & Boias de Flutuação",
+      "Churrasqueira a Bordo",
+    ],
     destaque: false,
     imagemUrl: "/img/Camera/Camera%20-%20Curdos%20Lancha%20(12).jpg",
+    imagens: [
+      "/img/Camera/Camera%20-%20Curdos%20Lancha%20(12).jpg",
+      "/img/Drone/Drone%20-%20Curdos%20Lancha%20(31).JPG",
+      "/img/Camera/Camera%20-%20Curdos%20Lancha%20(34).JPG",
+    ],
   },
   {
     id: "tingua-caixa-daco",
@@ -92,10 +140,22 @@ export const PASSEIOS_DATA: PasseioItem[] = [
     duracaoHoras: 7,
     capacidadeMax: 9,
     valorBase: 3400,
-    localEmbarque: "Trapiche Jurerê / Canasvieiras",
+    localEmbarque: "Marina Verde Mar / Trapiche Canasvieiras",
     roteiro: ["Baía de Jurerê", "Ilha do Francês", "Praia do Tinguá", "Caixa d'Aço"],
-    incluso: ["Combustível", "Marinheiro Habilitado", "Gelo Filtrado", "Churrasqueira Carvão", "Som Alta Potência"],
+    incluso: [
+      "1 Vaga de Estacionamento na Marina",
+      "Combustível de Todo o Percurso",
+      "Marinheiro Habilitado",
+      "Cooler com Gelo Disponível",
+      "Máscaras & Boias de Flutuação",
+      "Serviço de Churrasco a Bordo",
+    ],
     destaque: true,
     imagemUrl: "/img/Drone/Drone%20-%20Curdos%20Lancha%20(15).JPG",
+    imagens: [
+      "/img/Drone/Drone%20-%20Curdos%20Lancha%20(15).JPG",
+      "/img/Camera/Camera%20-%20Curdos%20Lancha%20(43).JPG",
+      "/img/Drone/Drone%20-%20Curdos%20Lancha%20(45).JPG",
+    ],
   },
 ];

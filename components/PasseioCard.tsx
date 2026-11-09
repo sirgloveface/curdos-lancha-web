@@ -1,6 +1,7 @@
 "use client";
 
-import { Clock, Users, MapPin, Check, Sparkles } from "lucide-react";
+import { useState } from "react";
+import { Clock, Users, MapPin, Check, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 import { PasseioLocalized } from "@/lib/i18n";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -12,6 +13,18 @@ interface PasseioCardProps {
 export function PasseioCard({ passeio, onSelect }: PasseioCardProps) {
   const { t } = useLanguage();
   const tx = t.sectionPasseios;
+  const images = passeio.imagens && passeio.imagens.length > 0 ? passeio.imagens : [passeio.imagemUrl];
+  const [currentImgIndex, setCurrentImgIndex] = useState(0);
+
+  const prevImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImgIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  };
+
+  const nextImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImgIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+  };
 
   return (
     <article className="group relative flex flex-col bg-slate-900/90 border border-slate-800 rounded-2xl overflow-hidden hover:border-cyan-500/50 transition-all duration-300 hover:shadow-2xl">
@@ -22,18 +35,54 @@ export function PasseioCard({ passeio, onSelect }: PasseioCardProps) {
         </div>
       )}
 
-      <div className="relative h-60 w-full overflow-hidden">
+      <div className="relative h-64 w-full overflow-hidden bg-slate-950">
         <div
-          className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-          style={{ backgroundImage: `url('${passeio.imagemUrl}')` }}
+          className="w-full h-full bg-cover bg-center transition-all duration-500 group-hover:scale-105"
+          style={{ backgroundImage: `url('${images[currentImgIndex]}')` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent" />
-        <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs font-semibold text-slate-200">
-          <span className="flex items-center gap-1 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md">
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-black/20" />
+
+        {images.length > 1 && (
+          <>
+            <button
+              onClick={prevImage}
+              aria-label="Foto anterior"
+              className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center backdrop-blur-md opacity-80 hover:opacity-100 transition-all border border-white/10"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button
+              onClick={nextImage}
+              aria-label="Próxima foto"
+              className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center backdrop-blur-md opacity-80 hover:opacity-100 transition-all border border-white/10"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+
+            <div className="absolute top-4 right-4 z-20 flex gap-1 bg-black/60 backdrop-blur-md px-2 py-1 rounded-full border border-white/10">
+              {images.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentImgIndex(idx);
+                  }}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    idx === currentImgIndex ? "bg-cyan-400 w-4" : "bg-white/40 hover:bg-white/70"
+                  }`}
+                  aria-label={`Ver foto ${idx + 1}`}
+                />
+              ))}
+            </div>
+          </>
+        )}
+
+        <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs font-semibold text-slate-200 z-10">
+          <span className="flex items-center gap-1 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10">
             <Clock className="w-3.5 h-3.5 text-cyan-400" />
             {passeio.duracaoHoras} {tx.duration}
           </span>
-          <span className="flex items-center gap-1 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md">
+          <span className="flex items-center gap-1 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10">
             <Users className="w-3.5 h-3.5 text-cyan-400" />
             {passeio.capacidadeMax} {tx.people}
           </span>
@@ -76,12 +125,15 @@ export function PasseioCard({ passeio, onSelect }: PasseioCardProps) {
               {tx.included}
             </span>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1 text-xs text-slate-300">
-              {passeio.incluso.slice(0, 6).map((item, i) => (
-                <li key={i} className="flex items-center gap-1.5 truncate">
-                  <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                  <span className="truncate">{item}</span>
-                </li>
-              ))}
+              {passeio.incluso.slice(0, 6).map((item, i) => {
+                const isNegative = item.startsWith("Sem ") || item.startsWith("Sin ");
+                return (
+                  <li key={i} className="flex items-center gap-1.5 truncate">
+                    <Check className={`w-3.5 h-3.5 shrink-0 ${isNegative ? "text-amber-400" : "text-emerald-400"}`} />
+                    <span className={`truncate ${isNegative ? "text-slate-400 italic" : "text-slate-200"}`}>{item}</span>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>

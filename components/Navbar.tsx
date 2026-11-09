@@ -20,7 +20,7 @@ export function Navbar() {
         <Link href="/" className="flex items-center gap-3 group">
           <div className="relative w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center shrink-0">
             <Image
-              src="/img/logo-curdos-lancha.png"
+              src="/img/curdos-lancha-logo.png"
               alt="Curdo's Lancha Logo"
               width={64}
               height={64}
@@ -37,7 +37,7 @@ export function Navbar() {
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
           <Link href="#passeios" className="hover:text-gold-400 transition-colors">{t.nav.passeios}</Link>
           <Link href="#lancha" className="hover:text-gold-400 transition-colors">{t.nav.lancha}</Link>
-          <Link href="#diferenciais" className="hover:text-gold-400 transition-colors">{t.nav.diferenciais}</Link>
+          <Link href="#galeria" className="hover:text-gold-400 transition-colors">{t.nav.fotos}</Link>
           <Link href="#faq" className="hover:text-gold-400 transition-colors">{t.nav.faq}</Link>
         </nav>
 

@@ -2,6 +2,7 @@ import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { PasseiosSection } from "@/components/PasseiosSection";
 import { BoatSpecs } from "@/components/BoatSpecs";
+import { GallerySection } from "@/components/GallerySection";
 import { FaqSection } from "@/components/FaqSection";
 import { Footer } from "@/components/Footer";
 
@@ -12,6 +13,7 @@ export default function HomePage() {
       <Hero />
       <PasseiosSection />
       <BoatSpecs />
+      <GallerySection />
       <FaqSection />
       <Footer />
     </main>
