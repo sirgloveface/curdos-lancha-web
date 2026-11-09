@@ -38,7 +38,7 @@ export function PasseioCard({ passeio, onSelect }: PasseioCardProps) {
       {passeio.destaque && (
         <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold-500 text-slate-950 text-xs font-bold shadow-md">
           <Sparkles className="w-3.5 h-3.5" />
-          <span>{tx.mostWanted}jdjdjdjdjdj</span>
+          <span>{tx.mostWanted}</span>
         </div>
       )}
 

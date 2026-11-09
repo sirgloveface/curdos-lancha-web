@@ -1,0 +1,71 @@
+name: Deploy Curdos Lancha to Render
+
+on:
+  push:
+    branches: [ main, develop ]
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.0.0
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci || npm install --legacy-peer-deps
+
+      - name: Generate Prisma Client
+        run: npx prisma generate
+
+      # - name: Run Linter
+      #   run: npm run lint
+
+      - name: Run Build
+        run: npm run build
+
+      - name: Extract version from package.json
+        id: get_version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Create and Push Git Tag
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          TAG_NAME="v${{ steps.get_version.outputs.VERSION }}"
+          
+          if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
+            echo "El tag $TAG_NAME ya existe en el repositorio. Saltando creación."
+          else
+            echo "Creando y subiendo el tag oficial: $TAG_NAME"
+            git tag $TAG_NAME
+            git push origin $TAG_NAME
+          fi
+
+      # =========================================================================
+      # 🚀 DESPLIEGUE EXCLUSIVO EN RENDER
+      # =========================================================================
+      - name: Trigger Render Deploy
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        env:
+          DEPLOY_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$DEPLOY_URL" ]; then
+            echo "Error: RENDER_DEPLOY_HOOK_URL no está configurado en GitHub Secrets"
+            exit 1
+          fi
+          echo "🚀 Disparando despliegue automático en Render para Curdos Lancha..."
+          curl -X POST -sS "$DEPLOY_URL"
