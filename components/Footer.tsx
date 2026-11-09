@@ -18,7 +18,7 @@ export function Footer() {
             <div className="flex items-center gap-3">
               <div className="relative w-12 h-12 flex items-center justify-center shrink-0">
                 <Image
-                  src="/img/logo-curdos-lancha.png"
+                  src="/img/curdos-lancha-logo.png"
                   alt="Curdo's Lancha Logo"
                   width={48}
                   height={48}
@@ -41,7 +41,7 @@ export function Footer() {
             <ul className="space-y-2 text-xs">
               <li><Link href="#passeios" className="hover:text-white transition-colors">Da Lagoa ao Mar Aberto</Link></li>
               <li><Link href="#passeios" className="hover:text-white transition-colors">Ilha do Campeche</Link></li>
-              <li><Link href="#passeios" className="hover:text-white transition-colors">Baía dos Golfinhos</Link></li>
+              <li><Link href="#passeios" className="hover:text-white transition-colors">Baía Funda ou Castelinho</Link></li>
               <li><Link href="#passeios" className="hover:text-white transition-colors">Costa da Lagoa</Link></li>
               <li><Link href="#passeios" className="hover:text-white transition-colors">Praia do Tinguá & Caixa d'Aço</Link></li>
             </ul>
