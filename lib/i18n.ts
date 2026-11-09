@@ -336,15 +336,18 @@ export const UI_TEXTS = {
     sectionPasseios: {
       tag: "Roteiros em Florianópolis",
       title: "Escolha Seu Passeio Privativo",
-      subtitle: "Valores fechados pela embarcação inteira (até 9 passageiros). Combustível, marinheiro e vaga inclusos em todas as saídas.",
+      subtitle: "Passeios privativos exclusivos para seu grupo (até 9 passageiros). Combustível, marinheiro habilitado e vaga na marina inclusos.",
       mostWanted: "Mais Procurado",
       departure: "Saída",
       duration: "Horas",
       people: "pessoas",
       stops: "Roteiro de Paradas",
       included: "Incluso no Barco",
-      priceLabel: "Valor Privativo",
-      bookBtn: "Reservar",
+      whatsappCta: "Falar no WhatsApp",
+      whatsappStatus: "Atendimento Imediato",
+      whatsappSub: "Valores sob consulta",
+      bookBtn: "Consultar no WhatsApp",
+      preBookModal: "Ou preencher formulário de pré-reserva",
     },
     bookingModal: {
       tag: "Solicitação de Reserva",
@@ -381,8 +384,8 @@ export const UI_TEXTS = {
       title: "Perguntas Frequentes",
       items: [
         {
-          q: "O valor é por pessoa ou pela lancha inteira?",
-          a: "O valor é fechado pela embarcação inteira (privativo para seu grupo de até 9 pessoas). Inclui marinheiro habilitado, 1 vaga de estacionamento na marina e combustível de todo o roteiro.",
+          q: "Como funciona a contratação do passeio?",
+          a: "Os passeios são exclusivos para seu grupo de até 9 pessoas. Inclui marinheiro habilitado, 1 vaga de estacionamento na marina e combustível de todo o roteiro. O atendimento e orçamento personalizado são feitos direto via WhatsApp com o comandante.",
         },
         {
           q: "O que acontece se chover ou o mar estiver agitado?",
@@ -394,7 +397,7 @@ export const UI_TEXTS = {
         },
         {
           q: "Como funciona a confirmação da reserva?",
-          a: "Ao enviar os dados pelo site, você é direcionado ao WhatsApp direto com o comandante para definir horários e sinal de garantia.",
+          a: "Ao entrar em contato pelo site, você fala direto pelo WhatsApp com o comandante para alinhar horários, detalhes personalizados e sinal de confirmação.",
         },
       ],
     },
@@ -434,15 +437,18 @@ export const UI_TEXTS = {
     sectionPasseios: {
       tag: "Rutas en Florianópolis",
       title: "Elige Tu Paseo Privado",
-      subtitle: "Precios cerrados por embarcación completa (hasta 9 pasajeros). Combustible, capitán y estacionamiento incluidos en todas las salidas.",
+      subtitle: "Paseos privados exclusivos para tu grupo (hasta 9 pasajeros). Combustible, capitán habilitado y estacionamiento en marina incluidos.",
       mostWanted: "Más Solicitado",
       departure: "Salida",
       duration: "Horas",
       people: "personas",
       stops: "Itinerario de Paradas",
       included: "Incluso no Barco",
-      priceLabel: "Precio Privado",
-      bookBtn: "Reservar",
+      whatsappCta: "Atención por WhatsApp",
+      whatsappStatus: "Atención Inmediata",
+      whatsappSub: "Tarifas personalizadas",
+      bookBtn: "Consultar por WhatsApp",
+      preBookModal: "O completar formulario de reserva",
     },
     bookingModal: {
       tag: "Solicitud de Reserva",
@@ -479,8 +485,8 @@ export const UI_TEXTS = {
       title: "Dudas Habituales",
       items: [
         {
-          q: "¿El precio es por persona o por la lancha completa?",
-          a: "El valor es cerrado por la embarcación entera (privado para tu grupo de hasta 9 personas). Incluye capitán profesional, 1 lugar de estacionamiento en la marina y combustible de todo el recorrido.",
+          q: "¿Cómo se contrata el paseo?",
+          a: "Los paseos son 100% privados para tu grupo de hasta 9 personas. Incluyen capitán habilitado, 1 lugar de estacionamiento en la marina y combustible de todo el recorrido. La atención y cotización personalizada se realizan directamente por WhatsApp con el capitán.",
         },
         {
           q: "¿Qué sucede si llueve o hay malas condiciones de mar?",
@@ -492,7 +498,7 @@ export const UI_TEXTS = {
         },
         {
           q: "¿Cómo se confirma la reserva?",
-          a: "Al enviar la solicitud, el sistema te redirige a WhatsApp directo con el capitán para acordar horario y depósito de la seña (30%).",
+          a: "Al hacer clic en el botón de WhatsApp, te comunicas directamente con el capitán para definir horarios, requerimientos especiales y confirmar la reserva.",
         },
       ],
     },

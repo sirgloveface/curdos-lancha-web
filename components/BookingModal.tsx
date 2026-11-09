@@ -79,7 +79,7 @@ export function BookingModal({ passeio, onClose }: BookingModalProps) {
               </span>
               <h3 className="text-2xl font-bold text-white mt-1">{passeio.titulo}</h3>
               <p className="text-xs text-slate-400 mt-1">
-                {passeio.duracaoHoras}h • {passeio.capacidadeMax} {t.sectionPasseios.people} • R$ {passeio.valorBase.toLocaleString("pt-BR")}
+                {passeio.duracaoHoras}h • {passeio.capacidadeMax} {t.sectionPasseios.people} • {locale === "es" ? "Paseo 100% Privado" : "Passeio 100% Privativo"}
               </p>
             </div>
 

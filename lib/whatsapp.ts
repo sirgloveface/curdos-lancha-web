@@ -1,11 +1,11 @@
 import { Locale } from "./i18n";
 
-const DEFAULT_PHONE = "5548999999999";
+const DEFAULT_PHONE = "5548992194523";
 
 interface WhatsAppBookingPayload {
   passeioTitulo: string;
-  dataPasseio: string;
-  quantidadePessoas: number;
+  dataPasseio?: string;
+  quantidadePessoas?: number;
   clienteNome?: string;
   valorBase?: number;
   locale?: Locale;
@@ -17,24 +17,22 @@ export function buildWhatsAppBookingUrl(payload: WhatsAppBookingPayload): string
 
   const lines = isEs
     ? [
-        "⚓ *Curdo's Lancha - Solicitud de Reserva*",
+        "⚓ *Curdo's Lancha - Solicitud de Paseo*",
         `• *Paseo:* ${payload.passeioTitulo}`,
-        `• *Fecha:* ${payload.dataPasseio}`,
-        `• *Pasajeros:* ${payload.quantidadePessoas}`,
+        payload.dataPasseio ? `• *Fecha Deseada:* ${payload.dataPasseio}` : null,
+        payload.quantidadePessoas ? `• *Pasajeros:* ${payload.quantidadePessoas}` : null,
         payload.clienteNome ? `• *Cliente:* ${payload.clienteNome}` : null,
-        payload.valorBase ? `• *Precio Estimado:* R$ ${payload.valorBase.toLocaleString("pt-BR")}` : null,
         "",
-        "¡Hola! Quisiera consultar la disponibilidad de la lancha para esta fecha.",
+        "¡Hola! Quisiera consultar tarifas y disponibilidad para este paseo en lancha.",
       ]
     : [
-        "⚓ *Curdo's Lancha - Solicitação de Reserva*",
+        "⚓ *Curdo's Lancha - Solicitação de Passeio*",
         `• *Passeio:* ${payload.passeioTitulo}`,
-        `• *Data:* ${payload.dataPasseio}`,
-        `• *Pessoas:* ${payload.quantidadePessoas}`,
+        payload.dataPasseio ? `• *Data Desejada:* ${payload.dataPasseio}` : null,
+        payload.quantidadePessoas ? `• *Passageiros:* ${payload.quantidadePessoas}` : null,
         payload.clienteNome ? `• *Cliente:* ${payload.clienteNome}` : null,
-        payload.valorBase ? `• *Valor Estimado:* R$ ${payload.valorBase.toLocaleString("pt-BR")}` : null,
         "",
-        "Olá! Gostaria de confirmar a disponibilidade da lancha para esta data.",
+        "Olá! Gostaria de consultar valores e disponibilidade para este passeio de lancha.",
       ];
 
   const text = encodeURIComponent(lines.filter(Boolean).join("\n"));
