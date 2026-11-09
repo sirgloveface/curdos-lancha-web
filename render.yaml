@@ -1,23 +1,26 @@
 services:
   - type: web
-    name: curdos-lancha
+    name: curdos-lancha-web
     runtime: node
     plan: free
-    buildCommand: npm install && npx prisma generate && npx prisma db push && npm run build
+    region: oregon
+    buildCommand: npm ci && npx prisma generate && (npx prisma db push || true) && npm run build
     startCommand: npm run start
     envVars:
+      - key: NODE_VERSION
+        value: 22.13.0
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+      - key: NEXT_PUBLIC_WHATSAPP_PHONE
+        value: "5548992194523"
       - key: DATABASE_URL
         fromDatabase:
-          name: curdos-postgres
+          name: curdos-lancha-db
           property: connectionString
-      - key: NEXT_PUBLIC_WHATSAPP_PHONE
-        value: 5548999999999
-      - key: NODE_VERSION
-        value: 20.18.0
 
 databases:
-  - name: curdos-postgres
+  - name: curdos-lancha-db
     databaseName: curdos_lancha
     user: curdo
     plan: free
-
+    region: oregon
