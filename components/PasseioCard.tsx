@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Clock, Users, MapPin, Check, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
+import { Clock, Users, MapPin, Check, Sparkles, ChevronLeft, ChevronRight, MessageCircle, Calendar } from "lucide-react";
 import { PasseioLocalized } from "@/lib/i18n";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -11,7 +11,7 @@ interface PasseioCardProps {
 }
 
 export function PasseioCard({ passeio, onSelect }: PasseioCardProps) {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const tx = t.sectionPasseios;
   const images = passeio.imagens && passeio.imagens.length > 0 ? passeio.imagens : [passeio.imagemUrl];
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
@@ -26,12 +26,19 @@ export function PasseioCard({ passeio, onSelect }: PasseioCardProps) {
     setCurrentImgIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
 
+  const defaultPhone = process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "5548992194523";
+  const isEs = locale === "es";
+  const whatsappMsg = isEs
+    ? `¡Hola! Me interesa el paseo "${passeio.titulo}" en Florianópolis. ¿Podrían informarme tarifas y disponibilidad?`
+    : `Olá! Tenho interesse no passeio "${passeio.titulo}" em Florianópolis. Gostaria de saber valores e datas disponíveis.`;
+  const directWhatsappUrl = `https://wa.me/${defaultPhone}?text=${encodeURIComponent(whatsappMsg)}`;
+
   return (
     <article className="group relative flex flex-col bg-slate-900/90 border border-slate-800 rounded-2xl overflow-hidden hover:border-cyan-500/50 transition-all duration-300 hover:shadow-2xl">
       {passeio.destaque && (
         <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold-500 text-slate-950 text-xs font-bold shadow-md">
           <Sparkles className="w-3.5 h-3.5" />
-          <span>{tx.mostWanted}</span>
+          <span>{tx.mostWanted}jdjdjdjdjdj</span>
         </div>
       )}
 
@@ -138,25 +145,43 @@ export function PasseioCard({ passeio, onSelect }: PasseioCardProps) {
           </div>
         </div>
 
-        <div className="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between">
-          <div>
-            <span className="text-[11px] uppercase tracking-wider text-slate-400 block font-medium">
-              {tx.priceLabel}
-            </span>
-            <div className="flex items-baseline gap-1">
-              <span className="text-sm font-semibold text-white">R$</span>
-              <span className="text-2xl font-black text-cyan-400">
-                {passeio.valorBase.toLocaleString("pt-BR")}
+        <div className="mt-6 pt-4 border-t border-slate-800/80 space-y-3">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-slate-950/60 p-3 rounded-2xl border border-slate-800/70">
+            <div className="flex items-center gap-2.5 px-1">
+              <span className="relative flex h-2.5 w-2.5 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
               </span>
+              <div>
+                <span className="text-xs font-bold text-slate-200 block leading-tight">
+                  {tx.whatsappStatus}
+                </span>
+                <span className="text-[11px] text-slate-400 block leading-tight mt-0.5">
+                  {tx.whatsappSub}
+                </span>
+              </div>
             </div>
+
+            <a
+              href={directWhatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 via-emerald-600 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-emerald-950/60 hover:shadow-emerald-500/30 transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] group/btn border border-emerald-400/30 shrink-0"
+            >
+              <MessageCircle className="w-4 h-4 text-emerald-100 group-hover/btn:scale-110 transition-transform" />
+              <span>{tx.whatsappCta}</span>
+            </a>
           </div>
 
-          <button
-            onClick={() => onSelect(passeio)}
-            className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-5 py-2.5 rounded-xl transition-all shadow-lg hover:scale-105 active:scale-95 text-sm"
-          >
-            {tx.bookBtn}
-          </button>
+          <div className="flex justify-end pr-1">
+            <button
+              onClick={() => onSelect(passeio)}
+              className="text-[11px] text-slate-400 hover:text-cyan-400 transition-colors inline-flex items-center gap-1 underline-offset-4 hover:underline"
+            >
+              <Calendar className="w-3 h-3 text-cyan-400/80" />
+              <span>{tx.preBookModal}</span>
+            </button>
+          </div>
         </div>
       </div>
     </article>
